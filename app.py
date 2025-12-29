@@ -1,24 +1,6 @@
 import streamlit as st
 import pandas as pd
 from prosesskm import buat_dataframe_hasil,grafik, korelasi_spearman, signifikansi_pvalue
-from streamlit_cookies_manager import EncryptedCookieManager
-
-# CEK COOKIES
-cookies = EncryptedCookieManager(
-    prefix="my_app",
-    password="super-secret-key" # HARUS SAMA DENGAN app.py
-)
-
-if not cookies.ready():
-    st.stop()
-
-# Kalau tidak ada cookie → lempar ke login
-if "email" not in cookies:
-    st.warning("SILAHKAN LOGIN TERLEBIH DAHULU")
-    st.session_state.clear()
-    st.stop()
-
-st.session_state.email = cookies["email"]
 
 hide_sidebar_style = """
     <style>
@@ -212,4 +194,5 @@ else:
                     st.stop()
     except Exception as e:
         st.error(f"🚫 File tidak sesuai format! Pastikan header, urutan kolom, dan nilai sesuai template.\n\n**Detail error:** {e}")
+
         st.stop()
